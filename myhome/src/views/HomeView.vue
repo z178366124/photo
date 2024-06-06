@@ -18,15 +18,15 @@ import TheWelcome from '../components/TheWelcome.vue'
 
 <script lang="js" setup>
     const url =
-    'src/assets/1.JPG'
+    '1.JPG'
     const srcList = [
-    'src/assets/1.JPG',
-    'src/assets/2.JPG',
-    'src/assets/3.JPG',
-    'src/assets/4.JPG',
-    'src/assets/5.JPG',
-    'src/assets/6.JPG',
-    'src/assets/7.JPG',
+    '1.jpg',
+    '2.jpg',
+    '3.jpg',
+    '4.jpg',
+    '5.jpg',
+    '6.jpg',
+    '7.jpg',
     ]
 </script>
 
