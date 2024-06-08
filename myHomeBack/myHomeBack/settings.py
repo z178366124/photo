@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "imagePool",
     "userImage",
     "sysApp",
+    "AiImageClass",
 ]
 
 MIDDLEWARE = [
@@ -134,3 +135,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 AUTH_USER_MODEL = "sysApp.User"
+
+AI_ROOT_PATH = BASE_DIR

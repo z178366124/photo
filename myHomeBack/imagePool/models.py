@@ -2,6 +2,11 @@ from django.db import models
 from django.utils import timezone
 import hashlib
 import os
+
+from AiImageClass.serializer import AiClassSerializer
+from AiImageClass.utils.utils import predict_cls
+from myHomeBack.utils.utils import is_app_installed
+from django.conf import settings
 # from snowflake import Snowflake
 # Create your models here.
 
@@ -60,5 +65,16 @@ class SysImg(models.Model):
                 return existing_objs.first()
             
             # 如果不存在相同哈希值的图片对象，则创建一个新的图片对象
-            img_obj = cls.objects.create(img=image_data)
+            img_obj = cls.objects.create(img = image_data)
+            if is_app_installed("AiImageClass"):
+                path = os.path.join(settings.AI_ROOT_PATH, img_obj.img.url[1:])
+                ret = predict_cls(path)
+                for dit in ret:
+                    dit["image"] = img_obj.pk
+                    serializer = AiClassSerializer(data = dit)
+                    if serializer.is_valid():
+                        serializer.save()
+                    else:
+                        errors = serializer.errors  # 获取错误信息
+                        print(errors)
             return img_obj

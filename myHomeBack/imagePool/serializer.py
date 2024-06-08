@@ -1,5 +1,7 @@
 from rest_framework import serializers
 from imagePool.models import SysImg
+from AiImageClass.utils.utils import predict_cls
+from myHomeBack.utils.utils import is_app_installed
 
 
 class SysImgSerializer(serializers.ModelSerializer):
@@ -16,6 +18,10 @@ class SysImgSerializer(serializers.ModelSerializer):
         # print()
         image = SysImg(**validated_data)
         image.save()
+
+        if is_app_installed("AiImageClass"):
+            ret = predict_cls(image.img.url)
+            print(ret)
         return image
     
 
