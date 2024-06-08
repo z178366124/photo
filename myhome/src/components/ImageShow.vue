@@ -25,10 +25,10 @@ defineProps({
       :preview-src-list="srcList"
       lazy
       :initial-index="index"/>
-        <div class="button-group">
-            <!-- <a class="button" :on-click="look">查看</a> -->
+        <!-- <div class="button-group">
+            <a class="button" :on-click="look">查看</a>
             <a class="button" :href="img.url" download="image.jpg">下载</a>
-        </div>
+        </div> -->
     </div>
 
     

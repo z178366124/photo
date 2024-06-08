@@ -41,7 +41,7 @@
         </el-row>
         <el-row :gutter="0">
             <div class="grid-content ep-bg-purple" />
-            <ImageBox :imgs="store.imgs" :srcList="store.srcList"></ImageBox>
+            <ImageBox :imgs="store.imgs" :srcList="store.srcList" style="height: 100%;"></ImageBox>
             <el-pagination background layout="prev, pager, next" @current-change="change_page_size" hide-on-single-page="true" v-model:current-page="store.currPage" v-model:page-size="store.pageSize" :total="store.count" />
         </el-row>
     </div>
@@ -55,7 +55,7 @@
             </el-col>
             <el-col :xs="20" :sm="20" :md="20" :lg="20" :xl="20">
                 <div class="grid-content ep-bg-purple" />
-                <ImageBox :imgs="store.imgs" :srcList="store.srcList"></ImageBox>
+                <ImageBox :imgs="store.imgs" :srcList="store.srcList" style="height: 100%;"></ImageBox>
                 <el-pagination background layout="prev, pager, next" @current-change="change_page_size" hide-on-single-page="true" v-model:current-page="store.currPage" v-model:page-size="store.pageSize" :total="store.count" />
 
             </el-col>

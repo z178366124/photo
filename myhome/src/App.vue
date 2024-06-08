@@ -54,7 +54,7 @@ import HeaderPage from './components/HeaderPage.vue'
                 <HeaderPage></HeaderPage>
             </el-header>
             <el-main>
-                <RouterView />
+                <RouterView style="min-height: 400px;" />
             </el-main>
             <el-footer>
                 <!-- <div width="100%" style="background-color: bisque;">
