@@ -18,5 +18,3 @@ class AiClass(models.Model):
     created = models.DateTimeField(default=timezone.now, verbose_name="图片创建时间")
     class Meta:
         ordering = ['-created']
-    def __str__(self) -> str:
-        return self.label

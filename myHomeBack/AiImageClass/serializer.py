@@ -14,3 +14,10 @@ class AiClassSerializer(serializers.ModelSerializer):
     class Meta:
         model = AiClass # 指定根据哪个模型类来序列化
         fields = ('id', 'image', 'label', 'locationX1', "locationY1", 'locationX2', "locationY2")
+
+class AiClassUseImageSerializer(serializers.ModelSerializer):
+    """元图片数据序列化器"""
+    label = AiClassTitleSerializer()
+    class Meta:
+        model = AiClass # 指定根据哪个模型类来序列化
+        fields = ('id', 'label', 'locationX1', "locationY1", 'locationX2', "locationY2")

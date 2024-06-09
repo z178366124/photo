@@ -16,7 +16,7 @@ def predict_cls(path):
                         "locationX2": float(x2), "locationY2": float(y2)})
     return ret
 # predict_cls("1.jpg")
-# results = model.predict("1.jpg")
+# results = model.predict("media/photo/2024-06-08/photo/2024-06-08/a4572a9a3880ec218a356d75435b6689fb9b528c7f5e5942ff34a_p0eg7iJ.jpeg")
 # Process results list
 # for result in results:
 #     boxes = result.boxes  # Boxes object for bounding box outputs
@@ -25,4 +25,4 @@ def predict_cls(path):
 #     probs = result.probs  # Probs object for classification outputs
 #     obb = result.obb  # Oriented boxes object for OBB outputs
 #     # result.show()  # display to screen
-#     result.save(filename="result.jpg")  # save to disk
+    # result.save(filename="result.jpg")  # save to disk

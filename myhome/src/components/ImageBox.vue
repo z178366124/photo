@@ -17,9 +17,6 @@ const isCanvasVisible = ref(false)
 const drawImageToCanvas = (event, image) => {
     isCanvasVisible.value = true
     const canvas = canvasRef.value;
-    canvas.style.top = '50%';
-    canvas.style.left = '50%';
-    canvas.style.transform = 'translate(-50%, 0%)'; // 使其居中
     const ctx = canvas.getContext('2d');
     const img = new Image();
     img.onload = () => {
@@ -65,8 +62,9 @@ const hideCanvas = ()=>{
 <template>
     <div class="flex-tile-container">
         <div v-for="(image, index) in imgs" :key="index" class="flex-tile-item">
-            <ImageShow :img="image" :index="index" :srcList="srcList" class="flex-tile-image" @mouseover="drawImageToCanvas($event, image)"
-            @mouseleave="hideCanvas()"/>
+            <ImageShow :img="image" :index="index" :srcList="srcList" class="flex-tile-image" />
+            <!-- <ImageShow :img="image" :index="index" :srcList="srcList" class="flex-tile-image" @mouseover="drawImageToCanvas($event, image)"
+            @mouseleave="hideCanvas()"/> -->
         </div>
     </div>
     <canvas ref="canvasRef" :style="{ display: isCanvasVisible ? 'block' : 'none'}" @click="hideCanvas"></canvas>
@@ -93,7 +91,10 @@ const hideCanvas = ()=>{
 }
 
 canvas {
-      position: absolute; /* 设置 Canvas 组件为绝对位置 */
-    }
+    position: absolute; /* 设置 Canvas 组件为绝对位置 */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 </style>
 

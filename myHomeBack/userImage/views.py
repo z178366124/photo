@@ -1,8 +1,10 @@
 import json
 from django.http import JsonResponse
 from django.views import View
+from django.db.models import Q
 from userImage.models import UserImg
 from userImage.serializer import UserImgSerializer, SysImgListSerializer
+from  AiImageClass.models import AiClass
 
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.generics import GenericAPIView
@@ -64,13 +66,16 @@ class UserImagesView(CreateModelMixin, ListModelMixin, GenericAPIView):
         '''根据请求参数动态配置 queryset'''
         queryset = UserImg.objects.all()
         # 通过请求参数过滤 queryset
-        sys_group_id = self.request.query_params.get('sys_group_id', None)
-
-        if sys_group_id == '1':
-            return queryset
+        sys_group_id = self.request.query_params.get('sys_group_id', '1')
+        ai_name = self.request.query_params.get('ai_name', '')
 
         if sys_group_id:
             queryset = queryset.filter(sysGroupId=sys_group_id)
+        if len(ai_name) > 0:
+            ai_model = AiClass.objects.filter(Q(label__chinese_title__icontains=ai_name) | Q(label__english_title__icontains=ai_name))
+            ai_model_values = ai_model.values("image")
+            unique_images = set(item['image'] for item in ai_model_values)
+            queryset = queryset.filter(image__in = unique_images)
         # 还可以根据其他请求参数进行过滤
 
         return queryset

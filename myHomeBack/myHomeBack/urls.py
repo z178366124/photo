@@ -24,6 +24,7 @@ urlpatterns = [
     path('home/',include('imagePool.urls', namespace='imagePool')),
     path('users/',include('userImage.urls', namespace='userImage')),
     path('sys/',include('sysApp.urls', namespace='sysApp')),
+    path('ai/',include('AiImageClass.urls', namespace='AiImageClass')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

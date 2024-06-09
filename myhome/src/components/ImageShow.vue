@@ -18,18 +18,35 @@ defineProps({
 </script>
 
 <template>
-    <div :key="img.fit" class="block" width="100px">
+    <!-- 相框展示图 -->
+    <el-card style="max-width: 380px" shadow="hover">
+        <template #header>图头</template>
+        <!-- <img
+        :src="img.image.img"
+        style="width: 100%"
+        /> -->
+        <div :key="img.fit" class="block" style="width: 100%;">
+            <el-image  style="width: 100%;" :src="img.image.img" fit="fill" :zoom-rate="1.2"
+            :max-scale="7"
+            :min-scale="0.2"
+            :preview-src-list="srcList"
+            lazy
+            :initial-index="index"/>
+        </div>
+        <template #footer>图尾</template>
+    </el-card>
+    <!-- <div :key="img.fit" class="block" width="100px">
         <el-image  style="width: 100px; height: 100px" :src="img.image.img" fit="scale-down" :zoom-rate="1.2"
       :max-scale="7"
       :min-scale="0.2"
       :preview-src-list="srcList"
       lazy
       :initial-index="index"/>
-        <!-- <div class="button-group">
+        <div class="button-group">
             <a class="button" :on-click="look">查看</a>
             <a class="button" :href="img.url" download="image.jpg">下载</a>
-        </div> -->
-    </div>
+        </div>
+    </div> -->
 
     
 </template>
@@ -48,8 +65,8 @@ defineProps({
         position: relative;
         display: inline-block; /* 让容器只占用所需的空间 */
         flex-shrink: 0;
-        width: 100px !important;
-        height: 100px;
+        /* width: 100px !important;
+        height: 100px; */
     }
 
     .block el-image{

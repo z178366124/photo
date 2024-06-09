@@ -3,6 +3,7 @@ from django.http import JsonResponse
 from django.views import View
 from .serializer import AiClassTitleSerializer, AiClassSerializer
 from .models import AiClass
+from django.db.models import Q
 
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.generics import GenericAPIView
@@ -51,6 +52,21 @@ class UserImagesView(CreateModelMixin, ListModelMixin, GenericAPIView):
     def post(self, request):
         '''保存图类'''
         return self.create(request)
+
+    def get_queryset(self):
+        '''根据请求参数动态配置 queryset'''
+        queryset = AiClass.objects.all()
+        # 通过请求参数过滤 queryset
+        # sys_group_id = self.request.query_params.get('sys_group_id', None)
+
+        # if sys_group_id == '1':
+        #     return queryset
+
+        # if sys_group_id:
+        #     queryset = queryset.filter(sysGroupId=sys_group_id)
+        # 还可以根据其他请求参数进行过滤
+        queryset = queryset.filter(Q(label__chinese_title__icontains='person') | Q(label__english_title__icontains='person'))
+        return queryset
 
 class UserImageView(GenericAPIView, UpdateModelMixin):
     serializer_class = AiClassSerializer  # 指定序列化器

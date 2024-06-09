@@ -6,6 +6,7 @@
     import AsidePage from '../components/AsidePage.vue'
     import { store, groupTree }  from "../store.js"
 
+    const aiInput = ref("")
     const isMobile = ref(false);
     watchEffect(() => {
       isMobile.value = window.innerWidth < 768; // 假设手机屏幕宽度小于 768px
@@ -23,6 +24,10 @@
         console.log("hello")
         get_img_list_view({"page": number, "sys_group_id": groupTree.select_id})
     }
+
+    const get_ai_class_image = () =>{
+        get_img_list_view({"sys_group_id": groupTree.select_id, "ai_name": aiInput.value})
+    }
     
 </script>
 
@@ -36,6 +41,12 @@
     
     <div v-if="isMobile">
         <el-row :gutter="0">
+            <el-col :xs="20" :sm="20" :md="20" :lg="20" :xl="20"></el-col>
+            <el-col :xs="4" :sm="4" :md="4" :lg="4" :xl="4">
+                <el-input v-model="aiInput" style="width: 100%" placeholder="Please input" @keyup.enter="get_ai_class_image"/>
+            </el-col>
+        </el-row>
+        <el-row :gutter="0">
             <div class="grid-content ep-bg-purple-light" />
                 <AsidePage ></AsidePage>
         </el-row>
@@ -46,6 +57,12 @@
         </el-row>
     </div>
     <div v-else>
+        <el-row :gutter="0">
+            <el-col :xs="20" :sm="20" :md="20" :lg="20" :xl="20"></el-col>
+            <el-col :xs="4" :sm="4" :md="4" :lg="4" :xl="4">
+                <el-input v-model="aiInput" style="width: 100%" placeholder="Please input" @keyup.enter="get_ai_class_image"/>
+            </el-col>
+        </el-row>
         <el-row :gutter="0">
             <el-col :xs="4" :sm="4" :md="4" :lg="4" :xl="4">
                 <div class="grid-content ep-bg-purple-light" />

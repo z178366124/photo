@@ -3,6 +3,8 @@ from userImage.models import UserImg
 from imagePool.models import SysImg
 from imagePool.serializer import SysImgSerializer
 from sysApp.models import SysGroup
+from AiImageClass.models import AiClass
+from AiImageClass.serializer import AiClassUseImageSerializer
 # from django.db import models
 
 def validate_file(value):
@@ -16,11 +18,12 @@ class UserImgSerializer(serializers.ModelSerializer):
     img = serializers.ImageField(write_only = True, required=False)
     # image = serializers.PrimaryKeyRelatedField(read_only=True)
     image = SysImgSerializer(read_only = True)
+    label = serializers.SerializerMethodField(read_only = True)
     # sysGroupId = serializers.PrimaryKeyRelatedField(read_only=True)
 
     class Meta:
         model = UserImg # 指定根据哪个模型类来序列化
-        fields = ('name', 'describe', 'img', 'image', 'sysGroupId')
+        fields = ('name', 'describe', 'img', 'image', 'sysGroupId', 'label')
 
     def create(self, validated_data):
         """新建"""
@@ -33,7 +36,14 @@ class UserImgSerializer(serializers.ModelSerializer):
         # # 创建用户图片对象，并将图像对象关联到用户图片中
         user_img = UserImg.objects.create(image=image, **validated_data)
         return user_img
-
+    
+    def get_label(self, obj):
+        ai_img_instance = AiClass.objects.filter(image=obj.image.pk)
+        if ai_img_instance:
+            a = AiClassUseImageSerializer(ai_img_instance, many=True).data
+            return a
+        return None
+    
 class SysImgListSerializer(serializers.ModelSerializer):
     """元图片数据序列化器"""
     img_list = serializers.ListField(child=serializers.ImageField(), write_only = True)
