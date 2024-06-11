@@ -16,4 +16,9 @@ export const groupTree = reactive({
     // imgs: []
 })
 
-export default {store, groupTree}
+export const imageBoxsSetting = reactive({
+    imageHeight: 100,
+    openImageInfo: true,
+})
+
+export default {store, groupTree, imageBoxsSetting}

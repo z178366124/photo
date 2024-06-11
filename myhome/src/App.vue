@@ -53,7 +53,7 @@ import HeaderPage from './components/HeaderPage.vue'
             <el-header>
                 <HeaderPage></HeaderPage>
             </el-header>
-            <el-main>
+            <el-main style="padding-top: 10px;">
                 <RouterView style="min-height: 400px;" />
             </el-main>
             <el-footer>

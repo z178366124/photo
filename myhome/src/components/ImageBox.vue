@@ -78,7 +78,7 @@ const hideCanvas = ()=>{
 .flex-tile-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px; /* 图片之间的间隔 */
+  gap: 5px; /* 图片之间的间隔 */
 }
 
 .flex-tile-item {
