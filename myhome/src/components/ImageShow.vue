@@ -19,26 +19,36 @@ defineProps({
 </script>
 
 <template>
-    <!-- 相框展示图 -->
-    <el-card style="max-width: 500px" shadow="hover" body-style="display:flex;padding:2px;justify-content: center;align-items: center;">
+    <!-- 相框展示图   style="max-width: 100px" -->
+    <el-card :style="{'max-width': imageBoxsSetting.imageHeight + 'px'}" shadow="hover" body-style="display:flex;padding:2px;justify-content: center;align-items: center;">
+    <!-- <el-card style="max-width: 500px" body-style="display:flex;"> -->
+
         <!-- <template style="height: 100%;" #header>图头</template> -->
         <!-- <img
         :src="img.image.img"
-        style="height: 10%"
+        style="height: 100px;"
         /> -->
-        <!-- <div :key="img.fit" class="block" style="height: 100px;"> -->
+        <!-- <div :key="img.fit" class="block" style="height: 100px; width: 100px;"> -->
         <div :key="img.fit" class="block" :style="{height: imageBoxsSetting.imageHeight + 'px'}">
-            <el-image  style="height: 100%" :src="img.image.img" fit="fill" :zoom-rate="1.2"
+            <el-image  style="overflow: hidden;height: 100%;object-fit: cover;" :src="img.image.img" fit="scale-down" :zoom-rate="1.2"
             :max-scale="7"
             :min-scale="0.2"
             :preview-src-list="srcList"
-            lazy
+            loading="lazy"
             :initial-index="index"/>
+            <!-- <div style="height: 100px;">
+                <img
+                    :src="img.image.img"
+                    style="height: 100%;"
+                    />
+            </div> -->
+            
         </div>
+
         <template v-if="imageBoxsSetting.openImageInfo" #footer>图尾</template>
     </el-card>
     <!-- <div :key="img.fit" class="block" width="100px">
-        <el-image  style="width: 100px; height: 100px" :src="img.image.img" fit="scale-down" :zoom-rate="1.2"
+        <el-image  style="height: 100px" :src="img.image.img" fit="scale-down" :zoom-rate="1.2"
       :max-scale="7"
       :min-scale="0.2"
       :preview-src-list="srcList"
@@ -98,5 +108,9 @@ defineProps({
 
     .block:hover .button-group{
         display: block;
+    }
+
+    .el-image__inner{
+        height: 100%;
     }
 </style>
